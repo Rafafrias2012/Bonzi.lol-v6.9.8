@@ -2,6 +2,7 @@
   "port":80,
   "godword":"PastuleWorld",
   "kingword":"PastuleWorld",
+  "rabbiword":"PastuleWorld",
   "altlimit": 4,
   "slowmode": 1000,
   "namelimit": 25,
