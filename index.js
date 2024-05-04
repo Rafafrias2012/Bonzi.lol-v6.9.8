@@ -215,25 +215,36 @@ if(blacklist.includes("")) blacklist = [];
     victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
   },
 
+  rabbimode:(victim, param)=>{
+    if(param == config.rabbiword) victim.level = 0.5;
+    victim.socket.emit("authlv",{level:0.5});
+  },
+
+  rabbi:(victim, param)=>{
+    if(victim.level<0.5) return;
+    victim.public.color = "rabbi";
+    victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
+  },
+
   jewify:(victim, param)=>{
-    if(victim.level<1 || !victim.room.usersPublic[param]) return;
+    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
     victim.room.usersPublic[param].color = "jew";
     victim.room.emit("update",{guid:param,userPublic:victim.room.usersPublic[param]});
   },
 
   bless:(victim, param)=>{
-    if(victim.level<1 || !victim.room.usersPublic[param]) return;
+    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
     victim.room.usersPublic[param].color = "blessed";
     victim.room.emit("update",{guid:param,userPublic:victim.room.usersPublic[param]});
   },
 
   statlock:(victim, param)=>{
-    if(victim.level<1 || !victim.room.usersPublic[param]) return;
+    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
     users[param].statlocked = !users[param].statlocked;
   },
 
   massbless:(victim, param)=>{
-    if(victim.level<1) return;
+    if(victim.level<0.5) return;
     for (var i = 0; i < victim.room.users.length; ++i) {
       if (victim.room.users[i].level < 1) {
         victim.room.users[i].public.color = "blessed";
