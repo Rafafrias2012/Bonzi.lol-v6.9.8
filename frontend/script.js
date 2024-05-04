@@ -800,7 +800,6 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["bless", d.id]});
                                         }
                                     },
-                                };
                     } else if(authlevel == 0.5){
                                 return {
                             items: {
@@ -904,11 +903,6 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["bless", d.id]});
                                         }
                                     },
-                                }
-                            }
-
-                            },
-                        };
                                 }
                             }
 
