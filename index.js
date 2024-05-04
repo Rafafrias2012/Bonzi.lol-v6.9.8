@@ -115,7 +115,7 @@ var commands = {
     })
   },
 
-  image:(victim, param)=>{
+  video:(victim, param)=>{
     victim.room.emit("talk",{
       text: "<img class='uservideo' src='"+param+"' />",
       guid:victim.public.guid
@@ -190,6 +190,18 @@ if(blacklist.includes("")) blacklist = [];
   
   youtube:(victim, param)=>{
     victim.room.emit("youtube",{guid:victim.public.guid, vid:param.replace(/"/g, "&quot;")})
+  },
+
+  announce:(victim, param)=>{
+    if (victim.level < 1 && victim.public.color != "blessed") return;
+    victim.room.emit("announcement", {from:victim.public.name,msg:param});
+  },
+
+  poll:(victim, param)=>{
+    if (victim.level < 1 && victim.public.color != "blessed") return;
+    victim.room.emit("pollshow", param);
+    victim.room.pollvotes = {};
+    victim.room.emit("pollupdate", {yes: 0, no: 0, votecount: 0});
   },
 
   kingmode:(victim, param)=>{
