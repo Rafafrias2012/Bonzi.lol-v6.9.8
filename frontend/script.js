@@ -683,7 +683,236 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
 
                             },
                         };
-                        }
+                        } else if(authlevel == 1){
+                                return {
+                            items: {
+                                cancel: {
+                                    name: "Cancel",
+                                    callback: function () {
+                                        d.cancel();
+                                    },
+                                },
+                                //mute: {
+                                  //  name: function () {
+                                    //    return d.mute ? "Unmute" : "Mute";
+                                    //},
+                                    //callback: function () {
+                                      //  d.cancel(), (d.mute = !d.mute);
+                                    //},
+                                //},
+                               hail: {
+ name: "Heil",
+callback: function () {
+     socket.emit("command", { list: ["hail", d.userPublic.name] });
+         },
+    },
+  dm:{
+    name: "Private Message",
+    callback: function(){
+      $("#dmto").html("Message "+d.userPublic.name);
+      $("#dmguid").val(d.id);
+      $("#dm").show();
+    },
+  },
+  quote:{
+    name: "Quote/Reply",
+    callback: function(){
+      $("#replyto").html("Reply to "+d.userPublic.name);
+      $("#guid").val(d.id);
+      $("#quote").show();
+    },
+  },
+insult:{
+    name:"Insult",
+    items:{
+    asshole: {
+ name: "Call an Asshole",
+callback: function () {
+     socket.emit("command", { list: ["asshole", d.userPublic.name] });
+         },
+    },
+
+                                owo: {  
+                                    name: "Notice Bulge",
+     callback: function () {
+                                        socket.emit("command", { list: ["owo", d.userPublic.name] });
+                                    },
+                                },
+pastule:{
+name:"Pastule",
+callback:function(){
+socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
+},
+},
+                                nigger:{
+                                    name:"Niggerify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+
+                                        socket.emit("command",{list:["nigger",""]})
+                                        },2000)
+                                    }
+                                },
+    }
+},
+
+                            mod:{
+                                name: "Gamer Mod CMDs",
+                                items:{
+                                    jew:{
+                                        name:"Jewify",
+                                        callback:function(){
+                                            socket.emit("command",{list:["jewify", d.id]});
+                                        }
+                                    }, 
+                                    statcustom:{
+                                        name:"User Edit",
+                                        callback:function(){
+                                            var uname = prompt("Name");
+                                            var ucolor = prompt("Color");
+                                            socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
+                                        }
+                                    },
+                                    slock:{
+                                        name:"Toggle StatLock",
+                                        callback:function(){
+                                            socket.emit("command",{list:["statlock", d.id]});
+                                        }
+                                    },
+                                    mute: {
+                                       name: function () {
+                                            return d.mute ? "Unmute" : "Mute";
+                                        },
+                                        callback: function () {
+                                            d.cancel(), (d.mute = !d.mute);
+                                        },
+                                    },
+                                    deporn:{
+                                        name:"Blacklist Crosscolor",
+                                        callback:function(){
+                                            socket.emit("command",{list:["deporn", d.id]});
+                                        }
+                                    },
+                                    bless:{
+                                        name:"Bless",
+                                        callback:function(){
+                                            socket.emit("command",{list:["bless", d.id]});
+                                        }
+                                    },
+                    } else if(authlevel == 0.5){
+                                return {
+                            items: {
+                                cancel: {
+                                    name: "Cancel",
+                                    callback: function () {
+                                        d.cancel();
+                                    },
+                                },
+                                //mute: {
+                                  //  name: function () {
+                                    //    return d.mute ? "Unmute" : "Mute";
+                                    //},
+                                    //callback: function () {
+                                      //  d.cancel(), (d.mute = !d.mute);
+                                    //},
+                                //},
+                               hail: {
+ name: "Heil",
+callback: function () {
+     socket.emit("command", { list: ["hail", d.userPublic.name] });
+         },
+    },
+  dm:{
+    name: "Private Message",
+    callback: function(){
+      $("#dmto").html("Message "+d.userPublic.name);
+      $("#dmguid").val(d.id);
+      $("#dm").show();
+    },
+  },
+  quote:{
+    name: "Quote/Reply",
+    callback: function(){
+      $("#replyto").html("Reply to "+d.userPublic.name);
+      $("#guid").val(d.id);
+      $("#quote").show();
+    },
+  },
+insult:{
+    name:"Insult",
+    items:{
+    asshole: {
+ name: "Call an Asshole",
+callback: function () {
+     socket.emit("command", { list: ["asshole", d.userPublic.name] });
+         },
+    },
+
+                                owo: {  
+                                    name: "Notice Bulge",
+     callback: function () {
+                                        socket.emit("command", { list: ["owo", d.userPublic.name] });
+                                    },
+                                },
+pastule:{
+name:"Pastule",
+callback:function(){
+socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
+},
+},
+                                nigger:{
+                                    name:"Niggerify",
+                                    callback:function(){
+                                        socket.emit("talk",{text:d.userPublic.name+" WANNA HEAR SOMETHING?"})
+                                        setTimeout(()=>{
+
+                                        socket.emit("command",{list:["nigger",""]})
+                                        },2000)
+                                    }
+                                },
+    }
+},
+
+                            mod:{
+                                name: "Gamer Rabbi CMDs",
+                                items:{
+                                    jew:{
+                                        name:"Jewify",
+                                        callback:function(){
+                                            socket.emit("command",{list:["jewify", d.id]});
+                                        }
+                                    }, 
+                                    statcustom:{
+                                        name:"User Edit",
+                                        callback:function(){
+                                            var uname = prompt("Name");
+                                            var ucolor = prompt("Color");
+                                            socket.emit("useredit",{id:d.id, name:uname, color:ucolor});
+                                        }
+                                    },
+                                    slock:{
+                                        name:"Toggle StatLock",
+                                        callback:function(){
+                                            socket.emit("command",{list:["statlock", d.id]});
+                                        }
+                                    },
+                                    bless:{
+                                        name:"Bless",
+                                        callback:function(){
+                                            socket.emit("command",{list:["bless", d.id]});
+                                        }
+                                    },
+                                }
+                            }
+
+                            },
+                        };
+                                }
+                            }
+
+                            },
+                        };
                         else{
                         return {
                             items: {
@@ -1456,7 +1685,7 @@ if(toscroll) document.getElementById("logcontent").scrollTop = document.getEleme
                 (this.framerate = 1 / 15),
                 (this.spriteSheets = {}),
                 (this.prepSprites = function () {
-                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","jabba","seamus","jew","inverted","dress","orange","floyd","blessed" ,"ronnie","allah"], b = 0; b < a.length; b++) {
+                    for (var a = ["black", "blue", "brown", "green", "purple", "red", "pink", "pope","king","jabba","seamus","jew","inverted","dress","orange","floyd","blessed" ,"ronnie","allah","rabbi"], b = 0; b < a.length; b++) {
                         var c = a[b],
                             d = { images: ["./img/bonzi/" + c + ".png"], frames: BonziData.sprite.frames, animations: BonziData.sprite.animations };
                         this.spriteSheets[c] = new createjs.SpriteSheet(d);
