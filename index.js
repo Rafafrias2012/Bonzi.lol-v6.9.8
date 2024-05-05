@@ -212,45 +212,62 @@ if(blacklist.includes("")) blacklist = [];
   king:(victim, param)=>{
     if(victim.level<1) return;
     victim.public.color = "king";
+    victim.public.tagged = true;
+    victim.public.tag = "King";
     victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
   },
 
-  rabbimode:(victim, param)=>{
-    if(param == config.rabbiword) victim.level = 0.5;
-    victim.socket.emit("authlv",{level:0.5});
-  },
-
-  rabbi:(victim, param)=>{
-    if(victim.level<0.5) return;
-    victim.public.color = "rabbi";
-    victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
+  tag:(victim, param)=>{
+    if(victim.level<1) return;
+    if (!param || param == "")
+      victim.public.tagged = false;
+    else {
+      victim.public.tagged = true;
+      victim.public.tag = param;
+    }
+    victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public});
   },
 
   jewify:(victim, param)=>{
-    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
+    if(victim.level<1 || !victim.room.usersPublic[param]) return;
     victim.room.usersPublic[param].color = "jew";
+    victim.room.usersPublic[param].tagged = true;
+    victim.room.usersPublic[param].tag = "Jew";
     victim.room.emit("update",{guid:param,userPublic:victim.room.usersPublic[param]});
   },
 
   bless:(victim, param)=>{
-    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
+    if(victim.level<1 || !victim.room.usersPublic[param]) return;
     victim.room.usersPublic[param].color = "blessed";
+    victim.room.usersPublic[param].tagged = true;
+    victim.room.usersPublic[param].tag = "Blessed";
     victim.room.emit("update",{guid:param,userPublic:victim.room.usersPublic[param]});
   },
 
   statlock:(victim, param)=>{
-    if(victim.level<0.5 || !victim.room.usersPublic[param]) return;
+    if(victim.level<1 || !victim.room.usersPublic[param]) return;
     users[param].statlocked = !users[param].statlocked;
   },
 
   massbless:(victim, param)=>{
-    if(victim.level<0.5) return;
+    if(victim.level<1) return;
     for (var i = 0; i < victim.room.users.length; ++i) {
       if (victim.room.users[i].level < 1) {
         victim.room.users[i].public.color = "blessed";
+        victim.room.users[i].public.tagged = true;
+        victim.room.users[i].public.tag = "Blessed";
         victim.room.emit("update",{guid:victim.room.users[i].public.guid,userPublic:victim.room.users[i].public});
       }
     }
+  },
+
+  rabbi:(victim, param)=>{
+    if(param == config.rabbiword) victim.level = 0.5;
+    victim.socket.emit("authlv",{level:0.5});
+    victim.public.color = "rabbi";
+    victim.public.tagged = true;
+    victim.public.tag = "Rabbi";
+    victim.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
   },
 
   deporn:(victim, param)=>{
@@ -279,6 +296,18 @@ if(blacklist.includes("")) blacklist = [];
       toniggery.socket.emit("nuke");
     toniggery.room.emit("update",{guid:victim.public.guid,userPublic:victim.public})
      setTimeout(()=>{victim.niggered = false},10000);
+  },
+
+  tagsom:(victim, param)=>{
+    var id = param.split(" ", 1), tag = param.substring(id.length + 1);
+    if(victim.level<2 || !victim.room.usersPublic[id]) return;
+    if (!tag || tag == "")
+      victim.room.usersPublic[id].tagged = false;
+    else {
+      victim.room.usersPublic[id].tagged = true;
+      victim.room.usersPublic[id].tag = tag;
+    }
+    victim.room.emit("update",{guid:id,userPublic:victim.room.usersPublic[id]});
   },
 
   kick:(victim, param)=>{
