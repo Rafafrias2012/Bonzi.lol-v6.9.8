@@ -570,12 +570,14 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["statlock", d.id]});
                                         }
                                     },
-                                    fullmute:{
-                                        name:"Server Mute/Unmute",
-                                        callback:function(){
-                                            socket.emit("command",{list:["smute", d.id]});
-                                        }
+                                    mute: {
+                                    name: function () {
+                                        return d.mute ? "Unmute" : "Mute";
                                     },
+                                    callback: function () {
+                                        d.cancel(), (d.mute = !d.mute);
+                                    },
+                                },
                                     deporn:{
                                         name:"Blacklist Crosscolor",
                                         callback:function(){
@@ -710,12 +712,14 @@ socket.emit("talk",{text: d.userPublic.name+" stop being a pastule"});
                                             socket.emit("command",{list:["statlock", d.id]});
                                         }
                                     },
-                                    fullmute:{
-                                        name:"Server Mute/Unmute",
-                                        callback:function(){
-                                            socket.emit("command",{list:["smute", d.id]});
-                                        }
+                                    mute: {
+                                    name: function () {
+                                        return d.mute ? "Unmute" : "Mute";
                                     },
+                                    callback: function () {
+                                        d.cancel(), (d.mute = !d.mute);
+                                    },
+                                },
                                     deporn:{
                                         name:"Blacklist Crosscolor",
                                         callback:function(){
