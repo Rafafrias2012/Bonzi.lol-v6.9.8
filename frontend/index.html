@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>BonziWORLD</title>
+	<title>BonziWORLD Official</title>
 	<meta charset="utf-8" />
-
-	<meta name="description" content="Official BonziWORLD website! Join a fun community without any rules! Official version of bonziworld.com and the best bonziworld server!"/>
+	<meta name="description" content="Welcome to Official BonziWORLD! Join a fun community based around BonziBUDDY without any rules! Chat, joke, share media and more!"/>
 
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="thumbnail" content="./download.jpg" />
 
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" id="stylesheet" type="text/css" href="./style.css">
 	<link rel="icon" type="image/png" href="./img/favicon.png" sizes="32x32">
 	<script src="./lib/easeljs.min.js"></script>
 	<script src="./lib/preloadjs-0.6.2.min.js"></script>
@@ -54,20 +53,26 @@ height:calc(100% - 30px);
 #log button{
 font-size:20px;
 position:fixed;
-padding:5px 10px;
+padding:5px 9px;
 top:3px;
 left:3px;
-border:none;
+/*border:4px outset #68358A;*/
 font-family:arial;
 background-color: #502570;
-border: 2px solid white;
 border-radius: 4px;
-box-shadow: inset 3px 3px 2px 2px #803376, inset -3px -3px 2px 2px #351044;
+box-shadow: inset 0px 0px 1px 2px rgba(0,0,0,0.3);
+background-image: radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), rgba(0,0,0,0) 50%);
+border: 1px solid white;
 color:white;
 z-index:-10;
 }
+#log button:hover{
+background-color: #703970;
+/*border: 4px inset #68358A;*/
+}
 #log button:active{
-box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
+background-color: #403060;
+/*border: 4px inset #68358A;*/
 }
 #mainlog{
     position:fixed;
@@ -105,11 +110,7 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 #logcontent::-webkit-scrollbar{
     display:none;
 }
-  .userimage{
-    width: 172px;
-    max-height: 172px;
-  }
-  .uservideo{
+  .userimage, .uservideo{
     width: 172px;
     max-height: 172px;
   }
@@ -151,6 +152,19 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 .bubble{
     z-index:1;
 }
+#page_kick{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+    @keyframes rainbow{
+        0%{color: red;}
+        16%{color: orange;}
+        32%{color: yellow;}
+        48%{color: lime;}
+        64%{color: cyan;}
+        80%{color: blue;}
+        90%{color: #FF00FF;}
+        100%{color: red;}
+    }
 </style>
 </head>
 <body>
@@ -171,9 +185,10 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 			<span>Room ID - <span class="room_id">???</span></span><br>
 			<span id="room_public">This room is public.</span>
 			<span id="room_private">This room is private.</span><br>
-			<span id="climit">Alt Limit: ???</span><br>
+			<span id="climit" style="display: none;">Alt Limit: ???</span>
 			<span id="memcount">Member Count: ???</span>
 			<span id="room_owner"><br>You are the owner of this room.</span><br>
+			<span id="desanitize" style="display: none;">HTML is allowed in this room. Join at your own risk.</span>
 		</div>
 
 		<canvas id="bonzi_canvas" width="100" height="100"></canvas>
@@ -189,7 +204,11 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 
 
 		<div id="page_login" class="page">
-			<div id="login_readme">The Offical BonziWORLD Website! <a href="http://classic.bonzi.lol/" target=_blank>Pure Classic BonziWORLD</a><hr><a href="./readme.html" target=_blank>README (instructions)</a> &nbsp; <a href="https://discord.com/invite/MSA22hu7" target=_blank>Discord Server</a> &nbsp; <a href="http://jabba.bonzi.lol:2095" target=_blank>BonziWORLD FE</a><!--<br><a href="./lv_0_20230806150240.mp4">How to attack Seamus for spamming porn</a><br>The reason most people on BWR don't talk is that they're bots--><!--<br><a href="https://rplace.live" target=_blank>Check out our partners (r/place clone)</a>--><br>BWR (AKA BWCE) Contains malware! Don't forget Seamus is 17 but his friends are under 11 e.g. yodatrees or loliest (what a creep)</div>
+			<div id="login_readme">Welcome to BonziWORLD! <a href="https://wiki.bonziworld.org" target=_blank>BonziWORLD Wiki!</a><hr><a href="./readme.html" target=_blank>README/HELP</a> &nbsp; <a href="https://discord.gg/Yuphr2bYr5" target=_blank>Discord Server</a> <!--Beware of websites that spam their links everywhere (e.g. <a href="http://wiki.bonzi.lol/index.php/BonziWORLD_Revived" target=_blank>BWR</a>), that's what scammers do.--> &nbsp; <a href="http://classic.bonziworld.org/" target=_blank>Classic BonziWORLD</a><br>
+            <a href="https://place.bonziworld.org/" target=_blank>FunyPlace</a> &nbsp;  <a href="https://demo.bonziworld.org/" target=_blank>BWRW Demo</a>
+
+
+</div>
 			<div id="login_card" style="display:none">
 				<input id="login_name" type="text" placeholder="Nickname">
 				<input id="login_room" type="text" placeholder="Room ID (Optional)">
@@ -197,7 +216,7 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 				<div id="login_error" style="display:none"></div>
 			</div>
 			<div id="login_load">loading</div>
-			<div id="login_version">Official BonziWORLD Version 6.9.11</div>
+			<div id="login_version">By continuing you agree to the <a href="https://bonziworld.org/tac.html" style='color: red;' target=_blank>Terms and Conditions</a>. Version 6.9.15</div>
 		</div>
 
 		<div id="page_error" class="page" style="display:none">
@@ -220,10 +239,18 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 			<div id="error_cont" class="message_cont">
 				<img src="./img/error/logo.png"><br>
 				<br>
-				<h1>BonziWORLD.exe doesnt want to accept your connection.(105)</h1><br>
-			        there are too many clients on your ip, the max limit is <b id=limitip>unknown</b><br>
+				<h1>Client limit violation</h1><br>
+			        You exceeded the maximum amount of clients allowed, this is to stop the server from being flooded.<br>
 				<br>
-				sorry but you exceeded the alt limit for this IP, this is to stop the server from being flooded.<br>
+			</div>
+		</div>
+                <div id="page_error106" class="page" style="display:none">
+			<div id="error_cont" class="message_cont">
+				<img src="./img/error/logo.png"><br>
+				<br>
+				<h1>Client Slowmode Violation</h1><br>
+			        You have logged in too many times too fast. Please wait for over 10 seconds before trying again.<br><br>
+                    Done waiting? <a href="#" onClick="window.location.reload()">Reload</a>
 				<br>
 			</div>
 		</div>
@@ -232,16 +259,16 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 			<div id="error_cont" class="message_cont">
 				<img src="./img/error/logo.png"><br>
 				<br>
-				<h1>BonziWORLD.exe is getting an update (104)</h1><br>
+				<h1>BonziWORLD.exe is getting an update</h1><br>
 			        The server is being updated. This may be a bug fix or a new feature or something else. Don't bother me about it cause I'll tell you what it is if it's important.
-                    <h3>You don't need to reload. Once the server is back up, you'll join automatically. Wait 5-10 seconds</h3>
+                    <br><br>You don't need to reload. Once the server is back up, you'll join automatically. Wait 5-10 seconds
 				<br><br>
-				<a href="#" onClick="window.location.reload()">Reload? (didnt rejoin after 5-10 seconds)</a>
+				<a href="#" onClick="window.location.reload()">Reload?</a>
 			</div>
 		</div>
 
      <div id="quote" class="page" style="display:none">
-			<div id="error_cont" class="message_cont">
+			<div class="message_cont">
 				<br>
 				<h1 id=replyto>Reply to ?</h1><br>
 			      <form action="javascript:quote()">
@@ -252,7 +279,24 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 			</div>
        
 		</div>
-     <div id="dm" class="page" style="display:none">
+     <div id="rabbi" class="page" style="display:none">
+			<div class="message_cont">
+				<img src="./img/rabbi.png"><br>
+				<br>
+				<h1> You're a RABBI </h1><br>
+                <div style="line-height: 1.2;">
+                <li>You can use /announce and /poll like regular blessed users!</li>
+                <li>Right click a user to use <b>Special Rabbi Commands</b>!</li>
+                <li>You can leave and rejoin and still have Rabbi!</li>
+                <li>Do /tag [YOUR CUSTOM TAG] to set your own tag!</li>
+                <li>Do <b>/rabbi</b> to change to your <b>Rabbi color!</b> (with the tag too)</li>
+                </div><br><br>
+                <button onclick="$('#rabbi').hide()">Close Message</button>
+            </form>
+			</div>
+       
+		</div>
+     <div id="dm" style="display:none">
 			<div id="error_cont" class="message_cont">
 				<br>
 				<h1 id=dmto>Message ?</h1><br>
@@ -265,10 +309,18 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 		</div>
 
              <div id="announcement" class="page" style="display:none">
-			<div id="error_cont" class="message_cont">
+			<div class="message_cont">
 				<h2 id=ancon>FROM?</h2><br>
                 <div id=ancontent></div><br>
                 <button onclick="$('#announcement').hide()">Hide</button>
+			</div>
+		</div>
+
+             <div id="motd" class="page" style="display:none">
+			<div class="message_cont">
+                <div id=motdcontent></div><br>
+                <h5>(You will only see this bubble again if there's a new different message)</h5>
+                <button onclick="$('#motd').hide()">Ok</button>
 			</div>
 		</div>
 
@@ -278,7 +330,9 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 				<br>
 				<h1>You got kicked!</h1><br>
 				<br>
-				<b>Why? You probably pissed off Fune, but you can rejoin as there are no rules!</b><br>
+				<b>Why?</b> You probably pissed off a King or Fune, but you can rejoin as there are no rules!<br><br>
+                <h3>Kicked by <font id="kicked_by">???</font></h3><br>
+                <a href="/">Reload</a>
 			</div>
 		</div>
 
@@ -337,4 +391,4 @@ box-shadow: inset 3px 3px 2px 2px #351044, inset -3px -3px 2px 2px #803376;
 	<ad></ad>
 
 </body>
-			</html>
+</html>
