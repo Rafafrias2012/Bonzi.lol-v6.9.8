@@ -332,11 +332,6 @@ var commands = {
     victim.room.usersPublic[param].typing = "";
     victim.room.emit("update",{guid:param,userPublic:victim.room.usersPublic[param]});
     users[param].socket.emit("nuke");
-    victim.lastMessage = "I AM A GAY FAGGOT";
-    if (users[param].nuked == null)
-      users[param].nuked = setInterval(() => {
-        victim.room.emit("talk", { guid: param, text: "I AM A GAY FAGGOT" })
-      }, 1200);
   },
 
   deporn:(victim, param)=>{
